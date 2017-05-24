@@ -1,0 +1,10 @@
+@using UnicamAppelli.Modello.Richieste
+@model CreazioneCorso
+<form method="POST">
+    <label>Nome del corso</label>
+    <input type="text" asp-for="Nome" />
+    <label>Nome del docente</label>
+    <input type="text" asp-for="Docente" />
+    <input type="submit" value="Crea corso" />
+</form>
+<div asp-validation-summary="All"></div>

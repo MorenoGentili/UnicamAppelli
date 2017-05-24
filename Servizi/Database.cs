@@ -1,8 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using UnicamAppelli.Modello;
 
 namespace UnicamAppelli.Servizi{
-    public class Database : DbContext  {
+    public class Database : DbContext, IServizioCorsi  {
       protected override void OnConfiguring(DbContextOptionsBuilder db){
                 db.UseSqlite(@"Data Source=..\..\..\mydb.db;");
       }  
@@ -16,7 +19,18 @@ namespace UnicamAppelli.Servizi{
 
       }
 
-      public DbSet<Corso> Corsi {
+        public async Task<IEnumerable<Corso>> Elenca()
+        {
+            return await Corsi.Include(corso => corso.Appelli).ToListAsync();
+        }
+
+        public async Task Crea(Corso corso)
+        {
+            Corsi.Add(corso);
+            await SaveChangesAsync();
+        }
+
+        public DbSet<Corso> Corsi {
             get;
             private set;
       }

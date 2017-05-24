@@ -1,6 +1,6 @@
 ﻿@using UnicamAppelli.Modello
 @using System.Collections.Generic
-@model List<Corso>
+@model IEnumerable<Corso>
 
 <ul> 
     @foreach(Corso corso in Model) {
@@ -17,3 +17,5 @@
 
 }
      </ul>
+
+<a href="/Home/Nuovo">Aggiungi nuovo corso</a>
